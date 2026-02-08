@@ -8,15 +8,12 @@ with open(path, "rb") as f:
 for chunk in iter(lambda: f.read(8192), b""):
 h.update(chunk)
 return h.hexdigest()
-
 def sha256_bytes(b):
 return hashlib.sha256(b).hexdigest()
-
 def main():
 if len(sys.argv) != 3:
 print("usage: verify.py <schema.json> <certificate.json>")
 sys.exit(2)
-
 schema_path = sys.argv[1]
 cert_path = sys.argv[2]
 
