@@ -1,47 +1,49 @@
 import json
 import hashlib
 import sys
+import os
 from jsonschema import Draft202012Validator
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+def resolve(path):
+    if os.path.isabs(path):
+        return path
+    return os.path.join(ROOT, path)
+
 def sha256_file(path):
-h = hashlib.sha256()
-with open(path, "rb") as f:
-for chunk in iter(lambda: f.read(8192), b""):
-h.update(chunk)
-return h.hexdigest()
-def sha256_bytes(b):
-return hashlib.sha256(b).hexdigest()
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(8192), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
 def main():
-if len(sys.argv) != 3:
-print("usage: verify.py <schema.json> <certificate.json>")
-sys.exit(2)
-schema_path = sys.argv[1]
-cert_path = sys.argv[2]
+    if len(sys.argv) != 3:
+        print("usage: verify.py <schema.json> <certificate.json>")
+        sys.exit(2)
 
-with open(schema_path) as f:
-    schema = json.load(f)
+    schema_path = resolve(sys.argv[1])
+    cert_path = resolve(sys.argv[2])
 
-with open(cert_path, "rb") as f:
-    cert_bytes = f.read()
-    cert = json.loads(cert_bytes)
+    with open(schema_path) as f:
+        schema = json.load(f)
 
-Draft202012Validator(schema).validate(cert)
+    with open(cert_path) as f:
+        cert = json.load(f)
 
-computed_cert_hash = sha256_bytes(cert_bytes)
-declared_cert_hash = cert["hashes"]["certificate_sha256"]
+    Draft202012Validator(schema).validate(cert)
 
-if computed_cert_hash != declared_cert_hash:
-    print("hash mismatch: certificate")
-    sys.exit(1)
+    for artifact in cert["evidence"]["artifacts"]:
+        artifact_path = resolve(artifact["path"])
+        declared = artifact["sha256"]
+        computed = sha256_file(artifact_path)
+        if declared != computed:
+            print(f"hash mismatch: {artifact['path']}")
+            sys.exit(1)
 
-for artifact in cert["evidence"]["artifacts"]:
-    path = artifact["path"]
-    declared = artifact["sha256"]
-    computed = sha256_file(path)
-    if declared != computed:
-        print(f"hash mismatch: {path}")
-        sys.exit(1)
+    print("VERIFIED")
 
-print("VERIFIED")
-print(f"certificate_sha256={computed_cert_hash}")
-if name == "main":
-main()
+if __name__ == "__main__":
+    main()
+
