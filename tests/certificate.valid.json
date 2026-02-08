@@ -1,23 +1,24 @@
 {
-"schema_version": "1.0.0",
-"certificate_type": "URF-SG",
-"invariants": [
-{
-"name": "FOk Refinement Wall",
-"statement": "FO^k-admissible refinement processes have entropy depth Theta(n)",
-"regime": "deterministic"
+  "schema_version": "1.0.0",
+  "certificate_type": "URF-SG",
+  "invariants": [
+    {
+      "name": "FOk Refinement Wall",
+      "statement": "FO^k-admissible refinement processes have entropy depth Theta(n)",
+      "regime": "deterministic"
+    }
+  ],
+  "evidence": {
+    "artifacts": [
+      {
+        "path": "tests/artifacts/example.txt",
+        "sha256": "f3ab28aaa17417e3cf92002fa7a86f0b2989c5e6f44cc27ea4be015a532571f1"
+      }
+    ],
+    "verifier_commit": "main"
+  },
+  "hashes": {
+    "certificate_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  }
 }
-],
-"evidence": {
-"artifacts": [
-{
-"path": "tests/artifacts/example.txt",
-"sha256": "REPLACE_HASH"
-}
-],
-"verifier_commit": "HEAD"
-},
-"hashes": {
-"certificate_sha256": "REPLACE_CERT_HASH"
-}
-}
+
