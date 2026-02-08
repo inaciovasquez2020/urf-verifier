@@ -2,7 +2,6 @@ import json
 import hashlib
 import sys
 from jsonschema import Draft202012Validator
-
 def sha256_file(path):
 h = hashlib.sha256()
 with open(path, "rb") as f:
@@ -24,7 +23,7 @@ cert_path = sys.argv[2]
 with open(schema_path) as f:
     schema = json.load(f)
 
-with open(cert_path) as f:
+with open(cert_path, "rb") as f:
     cert_bytes = f.read()
     cert = json.loads(cert_bytes)
 
