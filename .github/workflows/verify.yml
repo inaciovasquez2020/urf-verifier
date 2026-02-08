@@ -4,9 +4,6 @@ on:
   push:
   pull_request:
 
-permissions:
-  contents: read
-
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -23,11 +20,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install jsonschema
 
-      - name: Ensure replay script is executable
+      - name: Verify URF-SG certificate
         run: |
-          chmod +x replay/replay.sh
+          python3 verifier/verify.py schema/urf-sg.schema.json tests/certificate.valid.json
 
-      - name: Run deterministic verification
+      - name: Verify URF-ADM admissibility
         run: |
-          ./replay/replay.sh schema/urf-sg.schema.json tests/certificate.valid.json
+          python3 verifier/verify_adm.py schema/urf-adm.schema.json tests/adm/adm.valid.json
 
