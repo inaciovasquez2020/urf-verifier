@@ -1,0 +1,23 @@
+{
+"schema_version": "1.0.0",
+"certificate_type": "URF-SG",
+"invariants": [
+{
+"name": "FOk Refinement Wall",
+"statement": "FO^k-admissible refinement processes have entropy depth Theta(n)",
+"regime": "deterministic"
+}
+],
+"evidence": {
+"artifacts": [
+{
+"path": "tests/artifacts/example.txt",
+"sha256": "REPLACE_HASH"
+}
+],
+"verifier_commit": "HEAD"
+},
+"hashes": {
+"certificate_sha256": "REPLACE_CERT_HASH"
+}
+}
