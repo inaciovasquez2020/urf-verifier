@@ -1,0 +1,43 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://raw.githubusercontent.com/inaciovasquez2020/urf-verifier/main/schema/urf-adm.schema.json",
+"title": "URF Admissibility Certificate",
+"type": "object",
+"required": ["schema_version", "certificate_type", "admissibility", "evidence"],
+"properties": {
+"schema_version": { "type": "string", "const": "1.0.0" },
+"certificate_type": { "type": "string", "enum": ["URF-ADM"] },
+"admissibility": {
+"type": "object",
+"required": ["regime", "locality", "degree_bound", "no_global_state"],
+"properties": {
+"regime": { "type": "string", "enum": ["refinement"] },
+"locality": { "type": "string", "enum": ["FOk", "Gaifman"] },
+"degree_bound": { "type": "integer", "minimum": 1, "maximum": 64 },
+"no_global_state": { "type": "boolean", "const": true }
+},
+"additionalProperties": false
+},
+"evidence": {
+"type": "object",
+"required": ["artifacts"],
+"properties": {
+"artifacts": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "object",
+"required": ["path", "sha256"],
+"properties": {
+"path": { "type": "string" },
+"sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+},
+"additionalProperties": false
+}
+}
+},
+"additionalProperties": false
+}
+},
+"additionalProperties": false
+}
