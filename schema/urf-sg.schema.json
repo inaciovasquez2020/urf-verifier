@@ -1,0 +1,78 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://raw.githubusercontent.com/inaciovasquez2020/urf-verifier/main/schema/urf-sg.schema.json",
+"title": "URF Structural Guarantee Certificate",
+"type": "object",
+"required": [
+"schema_version",
+"certificate_type",
+"invariants",
+"evidence",
+"hashes"
+],
+"properties": {
+"schema_version": {
+"type": "string",
+"const": "1.0.0"
+},
+"certificate_type": {
+"type": "string",
+"enum": ["URF-SG"]
+},
+"invariants": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "object",
+"required": ["name", "statement", "regime"],
+"properties": {
+"name": { "type": "string" },
+"statement": { "type": "string" },
+"regime": {
+"type": "string",
+"enum": ["deterministic", "probabilistic", "averaged"]
+}
+},
+"additionalProperties": false
+}
+},
+"evidence": {
+"type": "object",
+"required": ["artifacts", "verifier_commit"],
+"properties": {
+"artifacts": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "object",
+"required": ["path", "sha256"],
+"properties": {
+"path": { "type": "string" },
+"sha256": {
+"type": "string",
+"pattern": "^[a-f0-9]{64}$"
+}
+},
+"additionalProperties": false
+}
+},
+"verifier_commit": {
+"type": "string"
+}
+},
+"additionalProperties": false
+},
+"hashes": {
+"type": "object",
+"required": ["certificate_sha256"],
+"properties": {
+"certificate_sha256": {
+"type": "string",
+"pattern": "^[a-f0-9]{64}$"
+}
+},
+"additionalProperties": false
+}
+},
+"additionalProperties": false
+}
