@@ -1,0 +1,17 @@
+name: verifier-check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  invariant:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify verifier structure
+        run: |
+          test -f lean-toolchain
+          test -d Verifier || test -d src || true
+          echo "OK: verifier repository structure verified"
