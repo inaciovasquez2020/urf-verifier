@@ -1,16 +1,39 @@
+name: Lean and Certificates
+
+on:
+  push:
+  pull_request:
+
 jobs:
   lean_and_certs:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - uses: leanprover/lean-action@v1
+      - name: Set up Lean
+        uses: leanprover/lean-action@v1
 
-      - uses: leanprover-community/mathlib-cache@v1
+      - name: Restore mathlib cache
+        uses: leanprover-community/mathlib-cache@v1
 
-      - name: Build
-        run: lake build
+      - name: Build Lean project
+        run: |
+          set -euo pipefail
+          lake build
 
+      - name: Verify transparency artifacts
+        run: |
+          set -euo pipefail
+
+          calc=$(sha256sum transparency/files.sha256 | awk '{print $1}')
+          exp=$(cat transparency/merkle.root)
+          [ "$calc" = "$exp" ]
+
+          calc2=$(sha256sum lean-attest/LEAN_BUILD_ATTEST.txt | awk '{print $1}')
+          exp2=$(cat lean-attest/LEAN_BUILD_ATTEST.sha256)
+          [ "$calc2" = "$exp2" ]
 
