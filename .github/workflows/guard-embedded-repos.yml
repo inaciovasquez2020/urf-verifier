@@ -1,0 +1,21 @@
+name: Guard: forbid embedded git repos
+on:
+  push:
+  pull_request:
+
+jobs:
+  forbid-embedded-repos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Fail if embedded .git directories exist
+        run: |
+          set -euo pipefail
+          if find . -path '*/.git' -type d | grep -v '^./.git$'; then
+            echo "ERROR: Embedded git repository detected."
+            exit 1
+          fi
+

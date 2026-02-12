@@ -1,0 +1,22 @@
+name: Guard: require submodules
+on:
+  push:
+  pull_request:
+
+jobs:
+  require-submodules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Assert submodules initialized and clean
+        run: |
+          set -euo pipefail
+          git submodule status --recursive
+          if git submodule status --recursive | grep -E '^[+-]'; then
+            echo "ERROR: Submodule not initialized or dirty."
+            exit 1
+          fi
+
