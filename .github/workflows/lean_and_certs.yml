@@ -1,0 +1,16 @@
+jobs:
+  lean_and_certs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: leanprover/lean-action@v1
+
+      - uses: leanprover-community/mathlib-cache@v1
+
+      - name: Build
+        run: lake build
+
+
