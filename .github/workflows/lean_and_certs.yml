@@ -1,39 +1,23 @@
-name: Lean and Certificates
+steps:
+  - uses: actions/checkout@v4
+    with:
+      submodules: recursive
 
-on:
-  push:
-  pull_request:
+  - uses: leanprover/lean-action@v1
 
-jobs:
-  lean_and_certs:
-    runs-on: ubuntu-latest
+  - uses: leanprover-community/mathlib-cache-action@v1
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
+  - name: Build Lean project
+    run: lake build
 
-      - name: Set up Lean
-        uses: leanprover/lean-action@v1
+  - name: Verify transparency artifacts
+    run: |
+      set -euo pipefail
+      calc=$(sha256sum transparency/files.sha256 | awk '{print $1}')
+      exp=$(cat transparency/merkle.root)
+      [ "$calc" = "$exp" ]
 
-      - name: Restore mathlib cache
-        uses: leanprover-community/mathlib-cache@v1
-
-      - name: Build Lean project
-        run: |
-          set -euo pipefail
-          lake build
-
-      - name: Verify transparency artifacts
-        run: |
-          set -euo pipefail
-
-          calc=$(sha256sum transparency/files.sha256 | awk '{print $1}')
-          exp=$(cat transparency/merkle.root)
-          [ "$calc" = "$exp" ]
-
-          calc2=$(sha256sum lean-attest/LEAN_BUILD_ATTEST.txt | awk '{print $1}')
-          exp2=$(cat lean-attest/LEAN_BUILD_ATTEST.sha256)
-          [ "$calc2" = "$exp2" ]
+      calc2=$(sha256sum lean-attest/LEAN_BUILD_ATTEST.txt | awk '{print $1}')
+      exp2=$(cat lean-attest/LEAN_BUILD_ATTEST.sha256)
+      [ "$calc2" = "$exp2" ]
 
