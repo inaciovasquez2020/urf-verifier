@@ -9,3 +9,6 @@ certs/*.minisig
 
 # Scratch
 out.txt
+# Demo / scratch
+claim*_demo/
+*.pub
