@@ -1,0 +1,11 @@
+# Secrets / keys
+*.key
+keys/*
+
+# Generated certs
+certs/*.json
+certs/*.hash
+certs/*.minisig
+
+# Scratch
+out.txt

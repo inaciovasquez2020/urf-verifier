@@ -3,7 +3,7 @@ set -euo pipefail
 
 CERT="${1:?usage: scripts/verify_cert.sh cert.json}"
 HASH="${CERT%.json}.hash"
-SIG="${HASH}.sig"
+SIG="${HASH}.minisig"
 PUB="keys/aiv_pub.key"
 
 [[ -f "$CERT" ]] || { echo "FAIL: cert missing"; exit 1; }
@@ -11,13 +11,11 @@ PUB="keys/aiv_pub.key"
 [[ -f "$SIG"  ]] || { echo "FAIL: signature missing"; exit 1; }
 [[ -f "$PUB"  ]] || { echo "FAIL: public key missing"; exit 1; }
 
-# recompute hash
 REHASH="$(shasum -a 256 "$CERT" | awk '{print $1}')"
 STORED="$(cat "$HASH")"
 
 [[ "$REHASH" == "$STORED" ]] || { echo "FAIL: certificate modified"; exit 2; }
 
-# verify signature
-minisign -Vm "$HASH" -p "$PUB" >/dev/null
+minisign -Vm "$HASH" -x "$SIG" -p "$PUB" >/dev/null
 
 echo "PASS: AIV certificate verified (minisign)"
