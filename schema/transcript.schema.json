@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "URF Transcript Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["transcript"],
+  "properties": {
+    "transcript": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain_size", "step"],
+      "properties": {
+        "domain_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "step": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "i",
+              "partition_hash",
+              "num_cells",
+              "cell_sizes",
+              "entropy_bits",
+              "delta_entropy_bits",
+              "admissibility"
+            ],
+            "properties": {
+              "i": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "partition_hash": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "num_cells": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "cell_sizes": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "entropy_bits": {
+                "type": "number",
+                "minimum": 0
+              },
+              "delta_entropy_bits": {
+                "type": "number"
+              },
+              "admissibility": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["model", "k", "local_radius"],
+                "properties": {
+                  "model": {
+                    "type": "string",
+                    "enum": ["FOk_refinement"]
+                  },
+                  "k": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "local_radius": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "inequalities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "statement_latex", "parameters"],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "statement_latex": {
+                "type": "string"
+              },
+              "parameters": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

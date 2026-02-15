@@ -1,0 +1,44 @@
+{
+  "transcript": {
+    "domain_size": 12,
+    "step": [
+      {
+        "i": 0,
+        "partition_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "num_cells": 1,
+        "cell_sizes": [12],
+        "entropy_bits": 0.0,
+        "delta_entropy_bits": 0.0,
+        "admissibility": {
+          "model": "FOk_refinement",
+          "k": 3,
+          "local_radius": 1
+        }
+      },
+      {
+        "i": 1,
+        "partition_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "num_cells": 2,
+        "cell_sizes": [6, 6],
+        "entropy_bits": 1.0,
+        "delta_entropy_bits": 1.0,
+        "admissibility": {
+          "model": "FOk_refinement",
+          "k": 3,
+          "local_radius": 1
+        }
+      }
+    ],
+    "inequalities": [
+      {
+        "name": "per_step_entropy_drop_bound",
+        "statement_latex": "\\Delta H_i \\le C / |\\\\Omega|",
+        "parameters": {
+          "C": 1.0,
+          "R_star": 10
+        }
+      }
+    ]
+  }
+}
+
