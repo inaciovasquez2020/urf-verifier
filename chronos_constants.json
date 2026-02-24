@@ -1,0 +1,13 @@
+{
+  "schema": "urf.chronos.depth.constants.v1",
+  "random_3sat": {
+    "c": 4.26,
+    "gamma_lb": 0.999997,
+    "alpha_lb": 0.333332,
+    "beta_lb": 5.89
+  },
+  "refinement": {
+    "radius_Rk": "k+1",
+    "c0": "2^(8*k) * k^(2*k) * Delta^(3*k)"
+  }
+}
