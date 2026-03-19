@@ -1,17 +1,9 @@
 name: verify
-
-on:
-  workflow_dispatch:
-
+on: [push]
 jobs:
-  verify:
+  check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: echo "Manual URF core verification (experimental)"
-
-      - name: Verifier invariant guards
-        run: |
-          test -f docs/VERIFIER_SPEC.md
-          test -f docs/REFEREE_OVERVIEW.md
-          test -f CONTRIBUTING.md
+      - uses: actions/checkout@v3
+      - name: Run certificate check
+        run: python3 infra/ci/verify_certificate.py
