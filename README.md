@@ -1,30 +1,29 @@
-# URF Verifier
+AIV Standard (v1.0)
 
-This repository provides the **verification tooling** for Unified Rigidity Framework (URF) artifacts.
+Quickstart
+  ./scripts/verify_cert.sh certs/AIV_CERT_CLAIM_0001.json
 
-It checks structural consistency, scope compliance, and certificate validity for released URF modules.
+Artifacts
+- standard/AIV_STANDARD_v1.md
+- schema/aiv-cert.schema.json
+- certs/AIV_CERT_CLAIM_0001.json
+- dist/AIV_Founding_Standard_v1.pdf
 
-## What it verifies
-- Structural correctness of URF certification artifacts.
-- Conformance to declared schemas and invariants.
-- Integrity of frozen, reference outputs.
+## Current Status
 
-## What it does not do
-- Does not generate proofs.
-- Does not establish mathematical truth.
-- Does not resolve open theoretical questions.
+- canonical
+- verifier-infrastructure-layer
+- stable
+- release-certified
+- deterministic
+- not theorem-prover-complete
+- not a primary mathematics-closure repository
 
-## How to run
-Typical usage:
-- Select a released artifact or certificate.
-- Run the verifier entry point provided in this repository.
+This repository is verifier infrastructure for URF artifacts.
+It does not generate proofs, establish mathematical truth, or serve as the canonical location
+for final theorem closure of URF mathematics.
 
-(Exact commands are documented alongside the verifier scripts.)
+## Canonical Scope Pointer
 
-## Output
-- Pass / fail verification results.
-- Structured diagnostics identifying violated constraints, if any.
+See `SCOPE_LIMITATIONS_STATUS.md` for the authoritative scope and limitations surface.
 
-## Status
-Stable verification tool.
-Intended for audit and reproducibility, not development.
