@@ -1,13 +1,24 @@
-# URF Reproduce — Status
+# Status
 
-## What this repo provides
-- Deterministic reproduction workflows for URF artifacts.
-- Scripts to re-run and validate reproducibility claims.
+Repository status: CANONICAL_REPRODUCIBILITY_SURFACE
 
-## What it verifies
-- That provided artifacts can be reproduced under declared constraints.
-- That demo artifacts run and emit expected outputs.
+Scope:
+- URF reproducibility repository
+- Reproduction, verification, and packaging surface
+- Repository-scope claims only
 
-## What it does not claim
-- It does not claim correctness of external artifacts without explicit certificates.
-- It does not claim completeness beyond the supported reproduction scope.
+Canonical files:
+- README.md
+- STATUS.md
+- FREEZE.md
+- CITATION.cff
+- .github/workflows/canonical-surface.yml
+- tests/test_canonical_surface.py
+
+Truth policy:
+- Do not claim theorem resolution unless explicitly proved in-repo.
+- Do not claim external acceptance or publication status without evidence.
+- Reproducibility closure is distinct from mathematical closure.
+
+Freeze note:
+- Canonical files must preserve scope-truth alignment.
