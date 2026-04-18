@@ -1,4 +1,7 @@
 name: Guard: require submodules
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   push:
   pull_request:
@@ -7,7 +10,7 @@ jobs:
   require-submodules:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           submodules: recursive
 
@@ -19,4 +22,4 @@ jobs:
             echo "ERROR: Submodule not initialized or dirty."
             exit 1
           fi
-
+  workflow_dispatch:
