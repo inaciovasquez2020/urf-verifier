@@ -27,3 +27,14 @@ for final theorem closure of URF mathematics.
 
 See `SCOPE_LIMITATIONS_STATUS.md` for the authoritative scope and limitations surface.
 
+## Citation
+
+Canonical citation:
+
+> Vasquez, Inacio. *urf-verifier*. GitHub repository. Version main. 2026-04-20.
+
+Machine-readable metadata:
+
+- `CITATION.cff`
+- `CITATION.json`
+- `ATTRIBUTION.md`
