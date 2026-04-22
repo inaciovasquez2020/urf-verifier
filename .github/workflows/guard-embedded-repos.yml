@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           submodules: recursive
+          token: ${{ secrets.SUBMODULES_TOKEN }}
       - name: Fail if embedded .git directories exist
         run: |
           set -euo pipefail
