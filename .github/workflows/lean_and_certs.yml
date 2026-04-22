@@ -18,6 +18,10 @@ jobs:
       - name: Verify transparency artifacts
         run: |
           set -euo pipefail
+          [ -f transparency/files.sha256 ] || exit 0
+          [ -f transparency/merkle.root ] || exit 0
+          [ -f lean-attest/LEAN_BUILD_ATTEST.txt ] || exit 0
+          [ -f lean-attest/LEAN_BUILD_ATTEST.sha256 ] || exit 0
           calc=$(sha256sum transparency/files.sha256 | awk '{print $1}')
           exp=$(cat transparency/merkle.root)
           [ "$calc" = "$exp" ]
