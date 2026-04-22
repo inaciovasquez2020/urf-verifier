@@ -1,10 +1,12 @@
-name: Guard: require submodules
+name: "Guard: require submodules"
+
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   require-submodules:
@@ -13,7 +15,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           submodules: recursive
-
+          token: ${{ secrets.SUBMODULES_TOKEN }}
       - name: Assert submodules initialized and clean
         run: |
           set -euo pipefail
@@ -22,4 +24,3 @@ jobs:
             echo "ERROR: Submodule not initialized or dirty."
             exit 1
           fi
-  workflow_dispatch:
