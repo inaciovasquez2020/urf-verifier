@@ -1,12 +1,17 @@
+This repository ships verifier logic, signature examples, and the public key.
+It does not currently ship a sample certificate payload or matching hash payload.
+To run the verifier locally, provide your own certificate artifacts under `certs/`.
+
+
 AIV Standard (v1.0)
 
 Quickstart
-  ./scripts/verify_cert.sh certs/AIV_CERT_CLAIM_0001.json
+  ./scripts/verify_cert.sh certs/YOUR_CERT.json
 
 Artifacts
 - standard/AIV_STANDARD_v1.md
 - schema/aiv-cert.schema.json
-- certs/AIV_CERT_CLAIM_0001.json
+- certs/YOUR_CERT.json
 - dist/AIV_Founding_Standard_v1.pdf
 
 ## Current Status
@@ -38,3 +43,13 @@ Machine-readable metadata:
 - `CITATION.cff`
 - `CITATION.json`
 - `ATTRIBUTION.md`
+
+## Input artifacts
+
+To run the verifier locally, provide:
+
+- `certs/YOUR_CERT.json`
+- `certs/YOUR_CERT.hash`
+- `certs/YOUR_CERT.json.sig`
+- `certs/YOUR_CERT.hash.sig`
+- `keys/aiv_pub.key`
