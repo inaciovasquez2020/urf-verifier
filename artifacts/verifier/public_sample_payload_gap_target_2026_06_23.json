@@ -1,0 +1,34 @@
+{
+  "object": "PublicSamplePayloadGapTarget",
+  "date": "2026-06-23",
+  "repository": "urf-verifier",
+  "status": "PUBLIC_SAMPLE_PAYLOAD_GAP_TARGET_ONLY",
+  "theorem_closure": false,
+  "proof_claim": false,
+  "purpose": "Name the bounded verifier-infrastructure gap visible in the public README: the repository ships signatures and verifier logic but does not currently ship a sample certificate payload or matching hash payload.",
+  "visible_gap_source": "README.md",
+  "minimal_missing_object": "PublicSampleCertificatePayloadAndHashPair",
+  "currently_present_signature_files": [
+    "certs/AIV_CERT_CLAIM_0001.json.sig",
+    "certs/AIV_CERT_CLAIM_0001.hash.sig"
+  ],
+  "currently_missing_payload_files": [
+    "certs/AIV_CERT_CLAIM_0001.json",
+    "certs/AIV_CERT_CLAIM_0001.hash"
+  ],
+  "required_future_outputs": [
+    "public sample certificate payload",
+    "matching public hash payload",
+    "sample-payload verifier entry point",
+    "README quickstart that runs against the checked-in sample payload"
+  ],
+  "non_claims": [
+    "does not add a sample certificate payload",
+    "does not add a matching hash payload",
+    "does not verify a real certificate payload",
+    "does not generate proofs",
+    "does not establish mathematical truth",
+    "does not claim theorem-level closure",
+    "does not claim external validation or peer-reviewed acceptance"
+  ]
+}
