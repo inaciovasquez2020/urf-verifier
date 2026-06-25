@@ -1,0 +1,5 @@
+URF_VERIFIER_LEAN_BUILD_ATTEST
+repo := inaciovasquez2020/urf-verifier
+source_commit := 23f88d9a1170cb6944a020942db6233fc7ab0f50
+workflow := lean_and_certs.yml
+attestation_kind := lean-build-presence-boundary
