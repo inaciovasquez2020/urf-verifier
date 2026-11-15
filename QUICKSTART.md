@@ -34,7 +34,17 @@ python3 -m pip install -r requirements.txt
 ls -la certs keys
 ```
 
-## 5. Run the verifier with your own certificate payload
+## 5. Run the included boundary check
+
+```bash
+python3 scripts/verify_verifier_boundary_certificate.py
+```
+
+Expect `"status": "PASS"` for the public file and scope check.
+
+## Verify your own signed certificate
+
+Install `minisign` and ensure `shasum` is available.
 
 The repository currently ships signature examples and the public key,
 but not a sample certificate payload or matching hash payload.
@@ -43,8 +53,7 @@ Provide these files:
 
 - `certs/YOUR_CERT.json`
 - `certs/YOUR_CERT.hash`
-- `certs/YOUR_CERT.json.sig`
-- `certs/YOUR_CERT.hash.sig`
+- `certs/YOUR_CERT.hash.minisig`
 - `keys/aiv_pub.key`
 
 Then run:
@@ -63,7 +72,7 @@ python3 -m pytest -q
 
 - `README.md`
 - `SCOPE_LIMITATIONS_STATUS.md`
-- `schema/aiv-cert.schema.json`
+- `schema/`
 - `certs/`
 - `keys/`
 - `docs/`
