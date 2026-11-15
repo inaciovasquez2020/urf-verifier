@@ -3,16 +3,15 @@ It does not currently ship a sample certificate payload or matching hash payload
 To run the verifier locally, provide your own certificate artifacts under `certs/`.
 
 
-AIV Standard (v1.0)
+## Quickstart
 
-Quickstart
-  ./scripts/verify_cert.sh certs/YOUR_CERT.json
+Run the included boundary check from the repository root with Python 3:
 
-Artifacts
-- standard/AIV_STANDARD_v1.md
-- schema/aiv-cert.schema.json
-- certs/YOUR_CERT.json
-- dist/AIV_Founding_Standard_v1.pdf
+```bash
+python3 scripts/verify_verifier_boundary_certificate.py
+```
+
+The check reports whether the required public files and boundary declaration are present. For signed certificate verification, follow [Quickstart](QUICKSTART.md).
 
 ## Current Status
 
@@ -46,12 +45,11 @@ Machine-readable metadata:
 
 ## Input artifacts
 
-To run the verifier locally, provide:
+For `./scripts/verify_cert.sh certs/YOUR_CERT.json`, install `minisign` and ensure `shasum` is available. Provide:
 
 - `certs/YOUR_CERT.json`
 - `certs/YOUR_CERT.hash`
-- `certs/YOUR_CERT.json.sig`
-- `certs/YOUR_CERT.hash.sig`
+- `certs/YOUR_CERT.hash.minisig`
 - `keys/aiv_pub.key`
 
 ## External status
