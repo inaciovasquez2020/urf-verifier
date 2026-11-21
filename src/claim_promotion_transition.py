@@ -19,6 +19,13 @@ class Claim:
     dependencies_ok: bool
     boundary_ok: bool
 
+    def __post_init__(self) -> None:
+        if type(self.status) is not str or self.status not in ("conditional", "proved"):
+            raise ValueError("Invalid claim status")
+        for name in ("evidence_ok", "dependencies_ok", "boundary_ok"):
+            if type(getattr(self, name)) is not bool:
+                raise TypeError(f"{name} must be bool")
+
 
 def promote(c: Claim) -> Claim:
     """A single transition, preserving the three input gates."""

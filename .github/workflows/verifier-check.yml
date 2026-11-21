@@ -16,5 +16,5 @@ jobs:
       - name: Verify verifier structure
         run: |
           test -f lean-toolchain
-          test -d Verifier || test -d src || true
+          test -d Verifier || test -d src
           echo "OK: verifier repository structure verified"
